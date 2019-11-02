@@ -23,6 +23,11 @@
         let transcript = event.results[0][0].transcript;
              var msg = new SpeechSynthesisUtterance()
             msg.text = "Hi";
+   var voices = window.speechSynthesis.getVoices();
+      msg.voice = voices[0];
+      msg.rate = 3 / 10;
+      msg.pitch = 8;
+      msg.text = text;
              speechSynthesis.speak(msg);
       document.querySelector('body').innerHTML = transcript;
     }
