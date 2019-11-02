@@ -22,7 +22,7 @@
     recognition.continuous = true;
     recognition.onresult = (event) => {
         let transcript = event.results[0][0].transcript;
-      responsiveVoice.speak("hello divy");
+      responsiveVoice.speak("hello");
       document.querySelector('body').innerHTML = transcript;
     }
     recognition.start();
