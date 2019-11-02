@@ -1,5 +1,4 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://code.responsivevoice.org/responsivevoice.js"></script>
 <div class="loader">
 <svg id="wave" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 38.05">
   <title>Audio Wave</title>
@@ -22,7 +21,9 @@
     recognition.continuous = true;
     recognition.onresult = (event) => {
         let transcript = event.results[0][0].transcript;
-      responsiveVoice.speak("hello");
+             var msg = new SpeechSynthesisUtterance()
+            msg.text = "Hi";
+             speechSynthesis.speak(msg);
       document.querySelector('body').innerHTML = transcript;
     }
     recognition.start();
