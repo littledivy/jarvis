@@ -27,7 +27,7 @@
       msg.voice = voices[0];
       msg.rate = 10 / 10;
       msg.pitch = 1;
-             speechSynthesis.speak(msg);
+             window.speechSynthesis.speak(msg);
       document.querySelector('body').innerHTML = transcript;
     }
     recognition.start();
