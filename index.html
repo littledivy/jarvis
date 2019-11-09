@@ -20,7 +20,29 @@
     recognition.interimResults = false;
     recognition.continuous = true;
     recognition.onresult = (event) => {
-        let transcript = event.results[0][0].transcript;
+        let transcript = event.results[0][0].transcript
+
+    $.ajax({
+        type: "POST",
+        url: "https://dialogflow.googleapis.com/v2/projects/YOUR-PROJECT-NAME/agent/sessions/SESSIONIDOFYOURCHOICE:detectIntent",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            "Authorization": "Bearer " + "YOUR ACCESS TOKEN GOES HERE",
+        },
+        data: JSON.stringify({ "queryInput":{
+            "text":{
+                "text":"YOUR QUERY TO NLU",
+                "languageCode":"en-US"
+            }
+        } }),
+        success: function(data) {
+            $("#div").html(data.queryResult.fulfillmentText);
+        },
+        error: function() {
+            console.log("Internal Server Error");
+        }
+    });     
              var msg = new SpeechSynthesisUtterance()
             msg.text = "Hi";
    var voices = window.speechSynthesis.getVoices();
