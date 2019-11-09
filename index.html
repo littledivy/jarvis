@@ -24,33 +24,33 @@
 
     $.ajax({
         type: "POST",
-        url: "https://dialogflow.googleapis.com/v2/projects/YOUR-PROJECT-NAME/agent/sessions/SESSIONIDOFYOURCHOICE:detectIntent",
+        url: "https://dialogflow.googleapis.com/v2/projects/leaflet-124/agent/sessions/SESSIONIDOFYOURCHOICE:detectIntent",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         headers: {
-            "Authorization": "Bearer " + "YOUR ACCESS TOKEN GOES HERE",
+            "Authorization": "Bearer " + "fee5825f20cf48589b655b5025ff53c4",
         },
         data: JSON.stringify({ "queryInput":{
             "text":{
-                "text":"YOUR QUERY TO NLU",
+                "text": transcript,
                 "languageCode":"en-US"
             }
         } }),
         success: function(data) {
-            $("#div").html(data.queryResult.fulfillmentText);
-        },
-        error: function() {
-            console.log("Internal Server Error");
-        }
-    });     
-             var msg = new SpeechSynthesisUtterance()
-            msg.text = "Hi";
+   var msg = new SpeechSynthesisUtterance()
+            msg.text = data.queryResult.fulfillmentText;
    var voices = window.speechSynthesis.getVoices();
       msg.voice = voices[0];
       msg.rate = 10 / 10;
       msg.pitch = 1;
              window.speechSynthesis.speak(msg);
-      document.querySelector('body').innerHTML = transcript;
+      document.querySelector('body').innerHTML = data.queryResult.fulfillmentText
+        },
+        error: function() {
+            console.log("Internal Server Error");
+        }
+    });     
+          
     }
     recognition.start();
   </script>
