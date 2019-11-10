@@ -16,6 +16,11 @@
 </svg>
 </div>
  <script>
+var msg = new SpeechSynthesisUtterance();
+   var voices = window.speechSynthesis.getVoices();
+      msg.voice = voices[0];
+      msg.rate = 10 / 10;
+      msg.pitch = 1;
     window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
     let finalTranscript = '';
     let recognition = new window.SpeechRecognition();
