@@ -27,8 +27,8 @@ var msg = new SpeechSynthesisUtterance();
     recognition.interimResults = false;
     recognition.continuous = true;
     recognition.onresult = (event) => {
-        let transcript = event.results[0][0].transcript
-
+        let transcript = event.results[0][0].transcript;
+alert(transcript);
     $.ajax({
         type: "POST",
         url: "https://dialogflow.googleapis.com/v2/projects/leaflet-123/agent/sessions/SESSIONIDOFYOURCHOICE:detectIntent",
