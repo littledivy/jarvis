@@ -43,12 +43,12 @@ alert(transcript);
         } }),
         success: function(data) {
             msg.text = data.queryResult.fulfillmentText;
-  
+             alert(msg.text)
              window.speechSynthesis.speak(msg);
       document.querySelector('body').innerHTML = data.queryResult.fulfillmentText
         },
-        error: function() {
-            console.log("Internal Server Error");
+        error: function(e) {
+            alert(e);
         }
     });     
           
