@@ -24,8 +24,6 @@ var msg = new SpeechSynthesisUtterance();
     window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
     let finalTranscript = '';
     let recognition = new window.SpeechRecognition();
-    recognition.interimResults = false;
-    recognition.continuous = true;
     recognition.onresult = (event) => {
         let transcript = event.results[0][0].transcript;
 alert(transcript);
