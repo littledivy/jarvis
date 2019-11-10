@@ -39,12 +39,8 @@
             }
         } }),
         success: function(data) {
-   var msg = new SpeechSynthesisUtterance()
             msg.text = data.queryResult.fulfillmentText;
-   var voices = window.speechSynthesis.getVoices();
-      msg.voice = voices[0];
-      msg.rate = 10 / 10;
-      msg.pitch = 1;
+  
              window.speechSynthesis.speak(msg);
       document.querySelector('body').innerHTML = data.queryResult.fulfillmentText
         },
