@@ -26,32 +26,11 @@ var msg = new SpeechSynthesisUtterance();
     let recognition = new window.SpeechRecognition();
     recognition.onresult = (event) => {
         let transcript = event.results[0][0].transcript;
-alert(transcript);
-    $.ajax({
-        type: "POST",
-        url: "https://dialogflow.googleapis.com/v2/projects/leaflet-123/agent/sessions/SESSIONIDOFYOURCHOICE:detectIntent",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        headers: {
-            "Authorization": "Bearer " + "51572604894f4ff3a41cbbb9b047e8a5"
-        },
-        data: JSON.stringify({ "queryInput":{
-            "text":{
-                "text": transcript,
-                "languageCode":"en-US"
-            }
-        } }),
-        success: function(data) {
-            msg.text = data.queryResult.fulfillmentText;
-             alert(msg.text+"and");
+         parse(transcript, function(arg) {
+            msg.text = arg;
              window.speechSynthesis.speak(msg);
-      document.querySelector('body').innerHTML = data.queryResult.fulfillmentText
-        },
-        error: function(e) {
-            alert(e);
-        }
-    });     
-          
+      document.querySelector('body').innerHTML = arg;     
+          });
     }
     recognition.start();
   </script>
