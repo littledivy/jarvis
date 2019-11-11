@@ -33,9 +33,11 @@ var msg = new SpeechSynthesisUtterance();
           });
     };
     function parse(msg, cb) {
+       msg = msg.trim();
        if(msg == "hi") {
          cb("Hello sir!");
         }
+else { cb("Sorry, I didn't get that"); }
     };
     recognition.start();
   </script>
