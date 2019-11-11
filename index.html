@@ -31,7 +31,12 @@ var msg = new SpeechSynthesisUtterance();
              window.speechSynthesis.speak(msg);
       document.querySelector('body').innerHTML = arg;     
           });
-    }
+    };
+    function parse(msg, cb) {
+       if(msg == "hi") {
+         cb("Hello sir!");
+        }
+    };
     recognition.start();
   </script>
 <style>
