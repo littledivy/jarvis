@@ -1,6 +1,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet">
 <div class="loader">
 <svg id="wave" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 38.05">
   <title>Jarvis</title>
@@ -15,6 +17,7 @@
   <path id="Line_9" data-name="Line 9" d="M48.91,15l-0.12,0A1,1,0,0,0,48,16v6a1,1,0,1,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H48.91Z"/>
 </svg>
 </div>
+<b><div id="toggle" style="display:none;">Talk now!</div></b>
  <script>
 var msg = new SpeechSynthesisUtterance();
    var voices = window.speechSynthesis.getVoices();
@@ -29,16 +32,29 @@ var msg = new SpeechSynthesisUtterance();
          parse(transcript, function(arg) {
             msg.text = arg;
              window.speechSynthesis.speak(msg);
-      document.querySelector('body').innerHTML = arg;     
+						$("#toggle").html(arg);
+						$("#toggle").toggle("bounce", { times: 2 }, "slow");    
+						setTimeout(function() {
+								$("#toggle").toggle("fade");				
+						},7000);
           });
     };
     function parse(msg, cb) {
        msg = msg.trim();
-       if(msg == "hi") {
-         cb("Hello sir!");
-        }
-else { cb("Sorry, I didn't get that"); }
+			 $.ajax({
+			   method:"GET",
+				 url:"/api/"+msg
+	     })
+			 .done(function(data) {
+						cb(data);
+			  });
     };
+		$(document).keydown(function(e) {
+			if (e.keyCode == 32) return onSpace();
+		});
+		function onSpace() {
+			recognition.start();
+		}
     recognition.start();
   </script>
 <style>
@@ -46,10 +62,24 @@ html, body {
   height: 100%;
 }
 
-body {
+body, html {
   background: #101010;
 }
-
+#toggle {
+	font-family: 'Titillium Web', sans-serif;	
+	font-size:30px;
+	word-wrap: break-word;
+	color:#fff;
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  transform: translate(-50%, -50%);
+  margin: 1px auto;
+	border-radius: 10px;
+	-webkit-box-shadow: 1px 10px 5px 3px rgba(69,65,69,0.45);
+	-moz-box-shadow: 1px 10px 5px 3px rgba(69,65,69,0.45);
+	box-shadow: 1px 10px 5px 3px rgba(69,65,69,0.45);
+}
 .loader {
   display: flex;
   align-items: center;
@@ -58,8 +88,8 @@ body {
 }
 
 #wave {
-  height: 70px;
-  width: 70px;
+  height: 150px;
+  width: 150px;
   fill: #fff;
 }
 
